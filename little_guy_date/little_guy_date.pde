@@ -6,31 +6,44 @@ Go on a date and try to win their heart!
 */
 
 boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
+int screen;
 LittleGuy date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate;
+Question question;
 
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
-  showStartScreen = true;
+  screen = 2;
   playerChosen = true;
-  showDateScreen = false;
-  showWinScreen = false;
-  showLoseScreen = false;
   date = new LittleGuy(4, 400, 300);
   player = new LittleGuy(1, 400, 300);
   leftArrow = new Button(150, 250, 50, 100, color(255));
   rightArrow = new Button(600, 250, 50, 100, color(255));
   selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77));
   selectDate = new Button(350, 500, 100, 50, color(104, 31, 77));
+  question = new Question("How do I look?", "Good!", "Meh.");
 }
 
 void draw() {
-  if(showStartScreen) startScreen();
-  else if(showDateScreen) dateScreen();
-  else if(showWinScreen) winScreen();
-  else if(showLoseScreen) loseScreen();
+  switch(screen) {
+    case 1:
+    startScreen();
+    break;
+    
+    case 2:
+    dateScreen();
+    break;
+    
+    case 3:
+    winScreen();
+    break;
+    
+    case 4:
+    loseScreen();
+    break;
+  }
 }
 
 void startScreen() {
@@ -73,6 +86,7 @@ void startScreen() {
 }
 
 void dateScreen() {
+  // Background
   background(104, 31, 77);
   player.setPosition(200, 480);
   date.setPosition(600, 480);
@@ -99,6 +113,9 @@ void dateScreen() {
   fill(241, 172, 63);
   ellipse(400, 470, 20, 20);
   triangle(400, 450, 410, 470, 390, 470);
+  
+  // Questions
+  question.display();
 }
 
 void winScreen() {
