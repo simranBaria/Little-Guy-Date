@@ -5,15 +5,16 @@ November 2023
 Go on a date and try to win their heart!
 */
 
-boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen;
+boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
 LittleGuy date, player;
 PFont font;
-Button leftArrow, rightArrow, select;
+Button leftArrow, rightArrow, selectPlayer, selectDate;
 
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
   showStartScreen = true;
+  playerChosen = true;
   showDateScreen = false;
   showWinScreen = false;
   showLoseScreen = false;
@@ -21,7 +22,8 @@ void setup() {
   player = new LittleGuy(1, 400, 300);
   leftArrow = new Button(150, 250, 50, 100, color(255));
   rightArrow = new Button(600, 250, 50, 100, color(255));
-  select = new Button(350, 500, 100, 50, color(104, 31, 77));
+  selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77));
+  selectDate = new Button(350, 500, 100, 50, color(104, 31, 77));
 }
 
 void draw() {
@@ -34,26 +36,40 @@ void draw() {
 void startScreen() {
   // Background
   background(255, 212, 244);
-  fill(255);
-  textFont(font);
-  textAlign(CENTER);
-  text("Pick your date!", width / 2, 100);
-  
-  // Show options
-  date.display();
   
   // Buttons
   leftArrow.display();
   rightArrow.display();
-  
   fill(104, 31, 77);
   triangle(160, 300, 190, 270, 190, 330);
   triangle(640, 300, 610, 270, 610, 330);
   
-  select.display();
-  fill(255);
-  textSize(25);
-  text("Date!", 400, 530);
+  if(!playerChosen) {
+    selectPlayer.display();
+    // Player selects an avatar
+    fill(255);
+    textFont(font);
+    textAlign(CENTER);
+    text("Pick your character!", width / 2, 100);
+    textSize(25);
+    text("That's me!", 400, 530);
+    
+    // Show options
+    player.display();
+  }
+  else {
+    // Player selects a date
+    selectDate.display();
+    fill(255);
+    textFont(font);
+    textAlign(CENTER);
+    text("Pick your date!", width / 2, 100);
+    textSize(25);
+    text("Date!", 400, 530);
+    
+    // Show options
+    date.display();
+  }
 }
 
 void dateScreen() {
