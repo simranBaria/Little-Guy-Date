@@ -1,19 +1,26 @@
-class Character {
+class LittleGuy {
+  // Initialize variables
   int style, x, y;
   
-  Character(int style, int x, int y) {
+  // Constructor
+  LittleGuy(int style, int x, int y) {
+    // Create
     this.style = style;
     this.x = x;
     this.y = y;
   }
   
+  // Function to set character position
   void setPosition(int x, int y) {
     this.x = x;
     this.y = y;
   }
   
+  // Function to display character
   void display() {
     noStroke();
+    
+    // Display the character based on the style
     switch(style) {
       case 1:
       draw1();
@@ -41,6 +48,7 @@ class Character {
     }
   }
   
+  // Function to draw style 1
   void draw1() {
     // Body
     fill(174, 32, 25);
@@ -76,6 +84,7 @@ class Character {
     quad(x - 60, y - 70, x - 50, y - 80, x - 30, y - 50, x - 10, y - 60);
   }
   
+  // Function to draw style 2
   void draw2() {
     // Hair 1
     fill(54, 20, 7);
@@ -112,6 +121,7 @@ class Character {
     rect(x - 20, y - 80, 80, 20);
   }
   
+  // Function to draw style 3
   void draw3() {
     // Hair 1
     fill(37, 37, 39);
@@ -161,6 +171,7 @@ class Character {
     triangle(x, y - 50, x + 10, y - 40, x + 30, y - 50);
   }
   
+  // Function to draw style 4
   void draw4() {
     // Hair 1
     fill(165, 42, 34);
@@ -206,6 +217,7 @@ class Character {
     rect(x + 30, y - 60, 20, 20);
   }
   
+  // Function to draw style 5
   void draw5() {
     // Body
     fill(121, 123, 186);
@@ -223,6 +235,7 @@ class Character {
     ellipse(x - 5, y - 30, 10, 20);
   }
   
+  // Function to draw style 6
   void draw6() {
     // Body
     fill(121, 123, 186);
