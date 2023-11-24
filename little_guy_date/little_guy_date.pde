@@ -9,13 +9,13 @@ boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerCh
 int screen;
 LittleGuy date, player;
 PFont font;
-Button leftArrow, rightArrow, selectPlayer, selectDate;
+Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
 Question question;
 
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
-  screen = 2;
+  screen = 3;
   playerChosen = true;
   date = new LittleGuy(4, 400, 300);
   player = new LittleGuy(1, 400, 300);
@@ -24,6 +24,7 @@ void setup() {
   selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77));
   selectDate = new Button(350, 500, 100, 50, color(104, 31, 77));
   question = new Question("How do I look?", "Good!", "Meh.");
+  replay = new Button(600, 500, 100, 50, color(104, 31, 77));
 }
 
 void draw() {
@@ -119,30 +120,48 @@ void dateScreen() {
 }
 
 void winScreen() {
+  // Background
   background(255, 212, 244);
+  
+  // Characters
   player.setPosition(200, 480);
   date.setPosition(320, 480);
   player.display();
   date.display();
-  fill(255);
-  textSize(50);
-  text("Success!", 200, 100);
-  fill(104, 31, 77);
-  rect(600, 500, 100, 50);
   
   // Bouquet
-  fill(181, 35, 45);
+  fill(35, 119, 34);
+  triangle(80, 510, 90, 490, 100, 500);
+  triangle(100, 420, 100, 440, 110, 440);
+  triangle(160, 430, 150, 450, 150, 440);
+  fill(221, 72, 74);
   ellipse(100, 490, 20, 20);
-  ellipse(100, 470, 40, 40);
+  fill(181, 35, 45);
   ellipse(100, 450, 20, 20);
-  ellipse(120, 480, 40, 40);
+  fill(196, 81, 135);
+  ellipse(100, 470, 40, 40);
   ellipse(110, 440, 20, 20);
+  fill(136, 21, 57);
+  ellipse(120, 480, 40, 40);
   ellipse(130, 440, 40, 40);
+  fill(221, 72, 74);
   ellipse(140, 450, 20, 20);
+  fill(181, 35, 45);
   ellipse(120, 460, 40, 40);
   fill(155, 213, 224);
   quad(100, 500, 150, 450, 180, 510, 160, 530);
   quad(180, 510, 160, 530, 160, 540, 190, 510);
+  
+  // Button
+  replay.display();
+  
+  fill(255);
+  textFont(font);
+  textAlign(CENTER);
+  text("Success!", 260, 200);
+  
+  textSize(25);
+  text("Replay", 650, 530);
 }
 
 void loseScreen() {
