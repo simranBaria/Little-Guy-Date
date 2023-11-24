@@ -15,7 +15,7 @@ Question question;
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
-  screen = 3;
+  screen = 4;
   playerChosen = true;
   date = new LittleGuy(4, 400, 300);
   player = new LittleGuy(1, 400, 300);
@@ -155,22 +155,53 @@ void winScreen() {
   // Button
   replay.display();
   
+  // Text
   fill(255);
   textFont(font);
   textAlign(CENTER);
   text("Success!", 260, 200);
-  
   textSize(25);
   text("Replay", 650, 530);
 }
 
 void loseScreen() {
+  // Background
   background(31, 34, 104);
+  
+  // Character
   player.setPosition(200, 480);
   player.display();
+  
+  // Phone
+  fill(63, 73, 92);
+  quad(210, 450, 260, 450, 240, 500, 190, 500);
+  
+  // Text bubble
   fill(255);
-  textSize(50);
-  text("Better luck next time!", 200, 100);
-  fill(104, 31, 77);
-  rect(600, 500, 100, 50);
+  rect(350, 250, 200, 150);
+  triangle(350, 370, 380, 400, 320, 430);
+  fill(172, 177, 183);
+  rect(360, 300, 180, 20);
+  fill(25, 36, 174);
+  textAlign(LEFT);
+  text("Google", 370, 290);
+  fill(0);
+  textSize(15);
+  text("How to date", 370, 315);
+  text("Search", 370, 335);
+  stroke(0);
+  noFill();
+  ellipse(425, 328, 5, 5);
+  line(417, 335, 423, 330);
+  
+  // Button
+  replay.display();
+  
+  // Text
+  fill(255);
+  textFont(font);
+  textAlign(CENTER);
+  text("Better luck next time!", 260, 200);
+  textSize(25);
+  text("Replay", 650, 530);
 }
