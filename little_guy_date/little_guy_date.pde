@@ -6,8 +6,8 @@ Go on a date and try to win their heart!
 */
 
 boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
-int screen;
-LittleGuy date, player;
+int screen, scroll;
+LittleGuy playerOptions[], dateOptions[], date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
 Question question;
@@ -15,16 +15,29 @@ Question question;
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
+  
+  // Set up screens
   screen = 1;
-  playerChosen = true;
-  date = new LittleGuy(6, 400, 300);
-  player = new LittleGuy(1, 400, 300);
+  playerChosen = false;
+  
+  // Create character options
+  playerOptions = new LittleGuy[3];
+  dateOptions = new LittleGuy[3];
+  for(int i = 0; i < playerOptions.length; i++) {
+    playerOptions[i] = new LittleGuy(i + 1, 400, 300);
+    dateOptions[i] = new LittleGuy(i + 4, 400, 300);
+  }
+  scroll = 0;
+  
+  // Create buttons
   leftArrow = new Button(150, 250, 50, 100, color(255));
   rightArrow = new Button(600, 250, 50, 100, color(255));
   selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77));
   selectDate = new Button(350, 500, 100, 50, color(104, 31, 77));
-  question = new Question("How do I look?", "Good!", "Meh.");
   replay = new Button(600, 500, 100, 50, color(104, 31, 77));
+  
+  // Create questions
+  question = new Question("How do I look?", "Good!", "Meh.");
 }
 
 void draw() {
@@ -69,7 +82,7 @@ void startScreen() {
     text("That's me!", 400, 530);
     
     // Show options
-    player.display();
+    playerOptions[scroll].display();
   }
   else {
     // Player selects a date
@@ -82,7 +95,7 @@ void startScreen() {
     text("Date!", 400, 530);
     
     // Show options
-    date.display();
+    dateOptions[scroll].display();
   }
 }
 
@@ -204,4 +217,54 @@ void loseScreen() {
   text("Better luck next time!", 260, 200);
   textSize(25);
   text("Replay", 650, 530);
+}
+
+void mouseClicked() {
+  switch(screen) {
+    // Select screen
+    case 1:
+    // Left arrow button
+    //println(mouseX);
+    if(leftArrow.clicked()) {
+      //print("clicked");
+      scroll--;
+      if(scroll == -1) {
+        //println("scrolled");
+        scroll = 2;
+      }
+    }
+    
+    // Right arrow button
+    else if(rightArrow.clicked()) {
+      scroll++;
+      if(scroll == 3) scroll = 0;
+    }
+    
+    // Select player button
+    else if(!playerChosen && selectPlayer.clicked()) {
+      player = new LittleGuy(scroll + 1, 400, 300);
+      scroll = 0;
+      playerChosen = true;
+    }
+    
+    // Select date button
+    else if(playerChosen && selectDate.clicked()) {
+      date = new LittleGuy(scroll + 4, 400, 300);
+      screen = 2;
+    }
+    
+    break;
+    
+    // Date screen
+    case 2:
+    break;
+    
+    // Win screen
+    case 3:
+    break;
+    
+    // Lose screen
+    case 4:
+    break;
+  }
 }
