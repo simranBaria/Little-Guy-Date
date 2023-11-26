@@ -15,9 +15,9 @@ Question question;
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
-  screen = 4;
+  screen = 1;
   playerChosen = true;
-  date = new LittleGuy(4, 400, 300);
+  date = new LittleGuy(6, 400, 300);
   player = new LittleGuy(1, 400, 300);
   leftArrow = new Button(150, 250, 50, 100, color(255));
   rightArrow = new Button(600, 250, 50, 100, color(255));
