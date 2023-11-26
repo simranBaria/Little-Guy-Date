@@ -10,14 +10,14 @@ int screen, scroll;
 LittleGuy playerOptions[], dateOptions[], date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
-Question question;
+Question questions[];
 
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
   
   // Set up screens
-  screen = 1;
+  screen = 2;
   playerChosen = false;
   
   // Create character options
@@ -28,6 +28,8 @@ void setup() {
     dateOptions[i] = new LittleGuy(i + 4, 400, 300);
   }
   scroll = 0;
+  player = new LittleGuy(1, 400, 300);
+  date = new LittleGuy(5, 400, 300);
   
   // Create buttons
   leftArrow = new Button(150, 250, 50, 100, color(255));
@@ -37,7 +39,7 @@ void setup() {
   replay = new Button(600, 500, 100, 50, color(104, 31, 77));
   
   // Create questions
-  question = new Question("How do I look?", "Good!", "Meh.");
+  createQuestions();
 }
 
 void draw() {
@@ -129,7 +131,7 @@ void dateScreen() {
   triangle(400, 450, 410, 470, 390, 470);
   
   // Questions
-  question.display();
+  questions[1].display();
 }
 
 void winScreen() {
@@ -217,6 +219,45 @@ void loseScreen() {
   text("Better luck next time!", 260, 200);
   textSize(25);
   text("Replay", 650, 530);
+}
+
+void createQuestions() {
+  questions = new Question[7];
+  questions[0] = new Question("How do I look?", "Good!", "Meh.");
+  
+  questions[1] = new Question("What made you want to ask me out?", "You're just my type!", "I was bored.");
+  questions[1].goodButton.setX(questions[1].goodButton.x - 75);
+  questions[1].goodButton.setW(questions[1].goodButton.w + 150);
+  questions[1].badButton.setX(questions[1].badButton.x - 25);
+  questions[1].badButton.setW(questions[1].badButton.w + 50);
+  
+  questions[2] = new Question("What are your hobbies?", "I like cooking.", "Nothing.");
+  questions[2].goodButton.setX(questions[2].goodButton.x - 50);
+  questions[2].goodButton.setW(questions[2].goodButton.w + 100);
+  questions[2].badButton.setX(questions[2].badButton.x - 25);
+  questions[2].badButton.setW(questions[2].badButton.w + 50);
+  
+  questions[3] = new Question("What do you think of video games? I like playing them.", "I like playing them too!", "They're stupid.");
+  questions[3].goodButton.setX(questions[3].goodButton.x - 100);
+  questions[3].goodButton.setW(questions[3].goodButton.w + 200);
+  questions[3].badButton.setX(questions[3].badButton.x - 50);
+  questions[3].badButton.setW(questions[3].badButton.w + 100);
+  
+  questions[4] = new Question("Would you want to play together some time?", "Yeah!", "I'll pass.");
+  questions[4].badButton.setX(questions[4].badButton.x - 25);
+  questions[4].badButton.setW(questions[4].badButton.w + 50);
+  
+  questions[5] = new Question("Maybe we could cook something. It could be a second date.", "That sounds fun!", "I'd rather not.");
+  questions[5].goodButton.setX(questions[5].goodButton.x - 75);
+  questions[5].goodButton.setW(questions[5].goodButton.w + 150);
+  questions[5].badButton.setX(questions[5].badButton.x - 50);
+  questions[5].badButton.setW(questions[5].badButton.w + 100);
+  
+  questions[6] = new Question("It's getting a little late now.", "I'll get the check!", "Can you pay?");
+  questions[6].goodButton.setX(questions[6].goodButton.x - 75);
+  questions[6].goodButton.setW(questions[6].goodButton.w + 150);
+  questions[6].badButton.setX(questions[6].badButton.x - 50);
+  questions[6].badButton.setW(questions[6].badButton.w + 100);
 }
 
 void mouseClicked() {

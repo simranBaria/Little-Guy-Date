@@ -33,4 +33,24 @@ class Button {
       return false;
     }
   }
+  
+  // Function to set x
+  void setX(int x) {
+    this.x = x;
+  }
+  
+  // Function to set y
+  void setY(int y) {
+    this.y = y;
+  }
+  
+  // Function to set w
+  void setW(int w) {
+    this.w = w;
+  }
+  
+  // Function to set h
+  void setH(int h) {
+    this.h = h;
+  }
 }

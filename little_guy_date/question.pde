@@ -20,6 +20,7 @@ class Question {
     fill(255);
     textFont(font);
     textAlign(CENTER);
+    textSize(25);
     text(question, width / 2, 50);
     
     // Buttons
@@ -28,7 +29,6 @@ class Question {
     
     // Answers
     fill(255);
-    textSize(25);
     text(goodAnswer, 200, 130);
     text(badAnswer, 600, 130);
   }

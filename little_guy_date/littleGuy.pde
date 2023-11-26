@@ -271,6 +271,7 @@ class LittleGuy {
     quad(x + 20, y - 70, x + 30, y + 10, x + 60, y - 30, x + 60, y - 70);
     quad(x - 40, y - 70, x - 30, y - 100, x + 40, y - 90, x + 60, y - 70);
     triangle(x - 80, y - 90, x - 40, y - 70, x - 30, y - 100);
+    rect(x + 30, y - 10, 20, 20);
   }
   
   // Function to draw style 6
