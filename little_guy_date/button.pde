@@ -14,6 +14,7 @@ class Button {
   
   //Function to display button
   void display() {
+    // Draw the button
     noStroke();
     rectMode(CORNER);
     fill(colour);

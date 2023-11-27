@@ -5,31 +5,36 @@ November 2023
 Go on a date and try to win their heart!
 */
 
+// Initialize variable
 boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
 int screen, scroll;
 LittleGuy playerOptions[], dateOptions[], date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
 Question questions[];
+ArrayList<Heart> hearts;
 
+// Setup function
 void setup() {
   size(800, 600);
   font = createFont("Spectral-Medium", 50);
   
   // Set up screens
-  screen = 2;
+  screen = 1;
   playerChosen = false;
   
   // Create character options
   playerOptions = new LittleGuy[3];
   dateOptions = new LittleGuy[3];
   for(int i = 0; i < playerOptions.length; i++) {
-    playerOptions[i] = new LittleGuy(i + 1, 400, 300);
-    dateOptions[i] = new LittleGuy(i + 4, 400, 300);
+    playerOptions[i] = new LittleGuy(i + 1);
+    playerOptions[i].setPosition(400, 300);
+    dateOptions[i] = new LittleGuy(i + 4);
+    dateOptions[i].setPosition(400, 300);
   }
   scroll = 0;
-  player = new LittleGuy(1, 400, 300);
-  date = new LittleGuy(5, 400, 300);
+  //player = new LittleGuy(1);
+  //date = new LittleGuy(5);
   
   // Create buttons
   leftArrow = new Button(150, 250, 50, 100, color(255));
@@ -40,9 +45,15 @@ void setup() {
   
   // Create questions
   createQuestions();
+  
+  // Create hearts
+  hearts = new ArrayList<Heart>();
+  increaseAffection();
 }
 
+// Draw function
 void draw() {
+  // Switch based on what screen to display
   switch(screen) {
     case 1:
     startScreen();
@@ -62,6 +73,7 @@ void draw() {
   }
 }
 
+// Function to draw the start screen
 void startScreen() {
   // Background
   background(255, 212, 244);
@@ -73,6 +85,7 @@ void startScreen() {
   triangle(160, 300, 190, 270, 190, 330);
   triangle(640, 300, 610, 270, 610, 330);
   
+  // Change what displays based on whether the player has selected an avatar or not
   if(!playerChosen) {
     selectPlayer.display();
     // Player selects an avatar
@@ -101,11 +114,18 @@ void startScreen() {
   }
 }
 
+// Function to draw the date screen
 void dateScreen() {
   // Background
   background(104, 31, 77);
-  player.setPosition(200, 480);
-  date.setPosition(600, 480);
+  
+  // Hearts
+  for(int i = 0; i < hearts.size(); i++) {
+    hearts.get(i).display();
+    hearts.get(i).update();
+  }
+  
+  // Characters
   player.display();
   date.display();
   
@@ -131,9 +151,10 @@ void dateScreen() {
   triangle(400, 450, 410, 470, 390, 470);
   
   // Questions
-  questions[1].display();
+  questions[0].display();
 }
 
+// Function to draw the win screen
 void winScreen() {
   // Background
   background(255, 212, 244);
@@ -179,6 +200,7 @@ void winScreen() {
   text("Replay", 650, 530);
 }
 
+// Function to draw the lose screen
 void loseScreen() {
   // Background
   background(31, 34, 104);
@@ -221,8 +243,11 @@ void loseScreen() {
   text("Replay", 650, 530);
 }
 
+// Function to create the questions
 void createQuestions() {
   questions = new Question[7];
+  
+  // Set up questions and buttons
   questions[0] = new Question("How do I look?", "Good!", "Meh.");
   
   questions[1] = new Question("What made you want to ask me out?", "You're just my type!", "I was bored.");
@@ -260,16 +285,28 @@ void createQuestions() {
   questions[6].badButton.setW(questions[6].badButton.w + 100);
 }
 
+// Function to increase affection
+void increaseAffection() {
+  // Add hearts to list
+  for(int i = 0; i < 20; i++) {
+    hearts.add(new Heart(int(random(0, width)), height + 10, 255, int(random(5, 10)), int(random(-10, -5))));
+  }
+}
+
+// Mouse clicked function
 void mouseClicked() {
+  // Switch based on which screen the player is on
   switch(screen) {
     // Select screen
     case 1:
     // Left arrow button
     //println(mouseX);
     if(leftArrow.clicked()) {
+      // Scroll through options
       //print("clicked");
       scroll--;
       if(scroll == -1) {
+        // Scroll back to other end
         //println("scrolled");
         scroll = 2;
       }
@@ -277,21 +314,27 @@ void mouseClicked() {
     
     // Right arrow button
     else if(rightArrow.clicked()) {
+      // Scroll through options
       scroll++;
+      // Scroll back to other end
       if(scroll == 3) scroll = 0;
     }
     
     // Select player button
     else if(!playerChosen && selectPlayer.clicked()) {
-      player = new LittleGuy(scroll + 1, 400, 300);
+      // Set player's avatar as the selected choice
+      player = new LittleGuy(scroll + 1);
       scroll = 0;
       playerChosen = true;
     }
     
     // Select date button
     else if(playerChosen && selectDate.clicked()) {
-      date = new LittleGuy(scroll + 4, 400, 300);
+      // Set player's date as the selected choice
+      date = new LittleGuy(scroll + 4);
       screen = 2;
+      player.setPosition(200, 480);
+      date.setPosition(600, 480);
     }
     
     break;

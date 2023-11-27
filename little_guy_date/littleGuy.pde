@@ -3,11 +3,11 @@ class LittleGuy {
   int style, x, y;
   
   // Constructor
-  LittleGuy(int style, int x, int y) {
+  LittleGuy(int style) {
     // Create
     this.style = style;
-    this.x = x;
-    this.y = y;
+    this.x = 0;
+    this.y = 0;
   }
   
   // Function to set character position
