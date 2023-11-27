@@ -1,5 +1,5 @@
 /*
-Little Guy Date - Milestone 1
+Little Guy Date - Milestone 2
 991737688
 November 2023
 Go on a date and try to win their heart!
