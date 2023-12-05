@@ -26,6 +26,7 @@ class Heart {
   void display() {
     // Draw the heart
     stroke(255, 115, 144, a);
+    strokeWeight(1);
     fill(255, 115, 144, a);
     beginShape();
     bezier(position.x, position.y, position.x + 10, position.y - 10, position.x + 10, position.y, position.x, position.y + 10);
@@ -47,7 +48,6 @@ class Heart {
   // Function to change opacity
   void setA(float a) {
     this.a = a;
-    println(a);
   }
   
   // Function to check if the heart is at the edge of it's range

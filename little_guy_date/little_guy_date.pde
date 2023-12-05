@@ -81,6 +81,7 @@ void startScreen() {
   // Buttons
   leftArrow.display();
   rightArrow.display();
+  noStroke();
   fill(104, 31, 77);
   triangle(160, 300, 190, 270, 190, 330);
   triangle(640, 300, 610, 270, 610, 330);
@@ -130,6 +131,7 @@ void dateScreen() {
   date.display();
   
   // Table
+  noStroke();
   fill(126, 86, 39);
   rect(270, 530, 20, 70);
   rect(500, 530, 20, 70);
@@ -166,6 +168,7 @@ void winScreen() {
   date.display();
   
   // Bouquet
+  noStroke();
   fill(35, 119, 34);
   triangle(80, 510, 90, 490, 100, 500);
   triangle(100, 420, 100, 440, 110, 440);
@@ -210,6 +213,7 @@ void loseScreen() {
   player.display();
   
   // Phone
+  noStroke();
   fill(63, 73, 92);
   quad(210, 450, 260, 450, 240, 500, 190, 500);
   
@@ -395,12 +399,14 @@ void mouseClicked() {
     case 2:
     // Good answer button
     if(questions[currentQuestion].goodButton.clicked()) {
+      date.setExpression("happy");
       increaseAffection();
       nextQuestion();
     }
     
     // Bad answer button
     else if(questions[currentQuestion].badButton.clicked()) {
+      date.setExpression("angry");
       decreaseAffection();
       nextQuestion();
     }
@@ -408,8 +414,23 @@ void mouseClicked() {
     // Check if character has run through all dialogue
     if(currentQuestion == questions.length) {
       // Decide ending based on affection
-      if(correctAnswers > incorrectAnswers) screen = 3;
-      else screen = 4;
+      if(correctAnswers > incorrectAnswers) {
+        // Good ending
+        // Change expressions
+        player.setExpression("happy");
+        date.setExpression("happy");
+        
+        // Change scene
+        screen = 3;
+      }
+      else {
+        // Bad ending
+        // Change expression
+        player.setExpression("sad");
+        
+        // Change scene
+        screen = 4;
+      }
     }
     break;
     

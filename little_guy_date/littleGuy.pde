@@ -1,6 +1,7 @@
 class LittleGuy {
   // Initialize variables
   int style, x, y;
+  String expression;
   
   // Constructor
   LittleGuy(int style) {
@@ -8,6 +9,7 @@ class LittleGuy {
     this.style = style;
     this.x = 0;
     this.y = 0;
+    expression = "neutral";
   }
   
   // Function to set character position
@@ -18,6 +20,7 @@ class LittleGuy {
   
   // Function to display character
   void display() {
+    rectMode(CORNER);
     noStroke();
     
     // Display the character based on the style
@@ -50,7 +53,6 @@ class LittleGuy {
   
   // Function to draw style 1
   void draw1() {
-    rectMode(CORNER);
     
     // Body
     fill(174, 32, 25);
@@ -63,11 +65,6 @@ class LittleGuy {
     rect(x - 40, y - 60, 100, 40);
     rect(x - 40, y - 20, 80, 20);
     ellipse(x + 40, y - 20, 40, 40);
-    
-    // Eyes
-    fill(0);
-    ellipse(x + 5, y - 30, 10, 20);
-    ellipse(x + 45, y - 30, 10, 20);
     
     // Bandage
     fill(236, 228, 218);
@@ -92,6 +89,9 @@ class LittleGuy {
     rect(x - 60, y - 70, 30, 40);
     rect(x - 50, y - 80, 110, 20);
     quad(x - 60, y - 70, x - 50, y - 80, x - 30, y - 50, x - 10, y - 60);
+    
+    // Eyes
+    expression();
   }
   
   // Function to draw style 2
@@ -115,11 +115,6 @@ class LittleGuy {
     rect(x - 40, y - 20, 80, 20);
     ellipse(x + 40, y - 20, 40, 40);
     
-    // Eyes
-    fill(0);
-    ellipse(x + 5, y - 30, 10, 20);
-    ellipse(x + 45, y - 30, 10, 20);
-    
     // Hair 2
     fill(54, 20, 7);
     triangle(x - 40, y + 30, x - 40, y - 20, x - 30, y + 20);
@@ -131,6 +126,9 @@ class LittleGuy {
     quad(x - 40, y - 90, x + 20, y - 100, x + 60, y - 80, x - 30, y - 70);
     quad(x + 50, y - 60, x + 60, y - 80, x + 70, y - 70, x + 60, y - 40);
     rect(x - 20, y - 80, 80, 20);
+    
+    // Eyes
+    expression();
   }
   
   // Function to draw style 3
@@ -154,11 +152,6 @@ class LittleGuy {
     rect(x - 40, y - 20, 80, 20);
     ellipse(x + 40, y - 20, 40, 40);
     
-    // Eyes
-    fill(0);
-    ellipse(x + 5, y - 30, 10, 20);
-    ellipse(x + 45, y - 30, 10, 20);
-    
     // Hair 2
     fill(37, 37, 39);
     quad(x - 80, y - 40, x - 70, y - 70, x - 50, y - 80, x - 60, y - 60);
@@ -181,6 +174,9 @@ class LittleGuy {
     quad(x - 50, y - 80, x - 30, y - 90, x, y - 50, x - 20, y - 40);
     rect(x - 30, y - 90, 90, 40);
     triangle(x, y - 50, x + 10, y - 40, x + 30, y - 50);
+    
+    // Eyes
+    expression();
   }
   
   // Function to draw style 4
@@ -200,11 +196,6 @@ class LittleGuy {
     rect(x - 60, y - 60, 100, 40);
     rect(x - 40, y - 20, 80, 20);
     ellipse(x - 40, y - 20, 40, 40);
-    
-    // Eyes
-    fill(0);
-    ellipse(x - 45, y - 30, 10, 20);
-    ellipse(x - 5, y - 30, 10, 20);
     
     // Hair 2
     fill(165, 42, 34);
@@ -227,6 +218,9 @@ class LittleGuy {
     quad(x - 60, y - 80, x + 40, y - 80, x + 70, y - 60, x - 60, y - 60);
     triangle(x + 10, y - 110, x + 10, y - 80, x + 40, y - 80);
     rect(x + 30, y - 60, 20, 20);
+    
+    // Eyes
+    expression();
   }
   
   // Function to draw style 5
@@ -255,11 +249,6 @@ class LittleGuy {
     rect(x - 40, y - 20, 80, 20);
     ellipse(x - 40, y - 20, 40, 40);
     
-    // Eyes
-    fill(0);
-    ellipse(x - 45, y - 30, 10, 20);
-    ellipse(x - 5, y - 30, 10, 20);
-    
     // Hair 2
     fill(236, 204, 131);
     quad(x - 60, y - 20, x - 70, y, x - 80, y + 20, x - 60, y + 40);
@@ -272,6 +261,9 @@ class LittleGuy {
     quad(x - 40, y - 70, x - 30, y - 100, x + 40, y - 90, x + 60, y - 70);
     triangle(x - 80, y - 90, x - 40, y - 70, x - 30, y - 100);
     rect(x + 30, y - 10, 20, 20);
+    
+    // Eyes
+    expression();
   }
   
   // Function to draw style 6
@@ -298,11 +290,6 @@ class LittleGuy {
     rect(x - 40, y - 20, 80, 20);
     ellipse(x - 40, y - 20, 40, 40);
     
-    // Eyes
-    fill(0);
-    ellipse(x - 45, y - 30, 10, 20);
-    ellipse(x - 5, y - 30, 10, 20);
-    
     // Hair 2
     fill(44, 26, 17);
     quad(x - 80, y - 60, x - 80, y, x - 70, y - 20, x - 60, y - 60);
@@ -315,5 +302,88 @@ class LittleGuy {
     quad(x + 30, y - 100, x + 20, y - 60, x + 40, y + 10, x + 50, y);
     quad(x + 30, y - 100, x + 60, y - 80, x + 70, y - 50, x + 40, y - 40);
     triangle(x + 40, y - 50, x + 70, y - 50, x + 70, y - 30);
+    
+    // Eyes
+    expression();
+  }
+  
+  // Method to change the expression
+  void setExpression(String expression) {
+    this.expression = expression;
+  }
+  
+  // Method to draw the expression
+  void expression() {
+    fill(0);
+    // Player characters
+    if(style < 4) {
+      switch(expression) {
+        case "neutral":
+        noStroke();
+        ellipse(x + 5, y - 30, 10, 20);
+        ellipse(x + 45, y - 30, 10, 20);
+        break;
+        
+        case "happy":
+        // Eyes
+        noFill();
+        stroke(0);
+        strokeWeight(5);
+        arc(x + 5, y - 15, 20 , 10, PI + QUARTER_PI, TWO_PI - QUARTER_PI);
+        arc(x + 45, y - 15, 20 , 10, PI + QUARTER_PI, TWO_PI - QUARTER_PI);
+        
+        // Blush
+        noStroke();
+        fill(255, 115, 144, 127.5);
+        ellipse(x - 5, y - 10, 30, 10);
+        ellipse(x + 55, y - 10, 30, 10);
+        break;
+        
+        case "sad":
+        noStroke();
+        ellipse(x + 5, y - 30, 10, 20);
+        ellipse(x + 45, y - 30, 10, 20);
+        stroke(0);
+        strokeWeight(5);
+        line(x - 5, y - 35, x + 10, y - 40);
+        line(x + 40, y - 40, x + 55, y - 35);
+        break;
+      }
+    }
+    // Date characters
+    else {
+      switch(expression) {
+        case "neutral":
+        noStroke();
+        ellipse(x - 45, y - 30, 10, 20);
+        ellipse(x - 5, y - 30, 10, 20);
+        break;
+        
+        case "happy":
+        // Eyes
+        noFill();
+        stroke(0);
+        strokeWeight(5);
+        arc(x - 45, y - 15, 20 , 10, PI + QUARTER_PI, TWO_PI - QUARTER_PI);
+        arc(x - 5, y - 15, 20 , 10, PI + QUARTER_PI, TWO_PI - QUARTER_PI);
+        
+        // Blush
+        noStroke();
+        fill(255, 115, 144, 127.5);
+        ellipse(x - 55, y - 10, 30, 10);
+        ellipse(x + 5, y - 10, 30, 10);
+        break;
+        
+        case "angry":
+        noStroke();
+        ellipse(x - 45, y - 30, 10, 20);
+        ellipse(x - 5, y - 30, 10, 20);
+        stroke(0);
+        strokeWeight(5);
+        line(x - 55, y - 45, x - 40, y - 40);
+        line(x - 10, y - 40, x + 5, y - 45);
+        break;
+      }
+    }
   }
 }
