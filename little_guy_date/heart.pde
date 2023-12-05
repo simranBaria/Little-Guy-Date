@@ -50,17 +50,23 @@ class Heart {
     println(a);
   }
   
+  // Function to check if the heart is at the edge of it's range
   boolean atBounds() {
     if(dist(centre, 0, position.x, 0) >= range) return true;
     else return false;
   }
   
+  // Function to set a randomized path for the heart to follow
   PVector setPath() {
+    // Use a random 2d vector to create a path
     PVector path = PVector.random2D();
     path.mult(5);
-    if(position.x <= left && path.x < 0) path.x *= -1;
-    else if(position.x >= right && path.x > 0) path.x *= -1;
-    if(path.y > 0) path.y *= -1;
+    
+    // Rotate the vector if it's out of bounds
+    if(path.y > 0) path.rotate(PI);
+    if(position.x <= left && path.x < 0) path.rotate(HALF_PI);
+    else if(position.x >= right && path.x > 0) path.rotate(-HALF_PI);
+    
     return path;
   }
 }

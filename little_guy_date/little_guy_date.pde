@@ -33,8 +33,6 @@ void setup() {
     dateOptions[i].setPosition(400, 300);
   }
   scroll = 0;
-  //player = new LittleGuy(1);
-  //date = new LittleGuy(5);
   
   // Create buttons
   leftArrow = new Button(150, 250, 50, 100, color(255));
@@ -126,9 +124,6 @@ void dateScreen() {
     hearts.get(i).display();
     hearts.get(i).update();
   }
-  //hearts.add(new Heart(int(random(0, width)), height + 10, 255, int(random(5, 10)), int(random(-10, -5))));
-  //hearts.get(0).display();
-  //hearts.get(0).update();
   
   // Characters
   player.display();
@@ -155,7 +150,7 @@ void dateScreen() {
   ellipse(400, 470, 20, 20);
   triangle(400, 450, 410, 470, 390, 470);
   
-  // Questions
+  // Question
   questions[currentQuestion].display();
 }
 
@@ -300,8 +295,9 @@ void increaseHearts() {
 
 // Function to decrease hearts in list
 void decreaseHearts() {
-  // Remove hearts from the list
+  // Check if the list is empty
   if(!hearts.isEmpty()) {
+    // Remove hearts from the list
     for(int i = 0; i < 20; i++) {
       hearts.remove(hearts.size() - 1);
     }
@@ -329,6 +325,8 @@ void decreaseAffection() {
 
 // Function to change the opacity of the hearts
 void changeOpacity() {
+  // Every affection increase adds 20 hearts
+  // So opacity changes with every 20 hearts
   int scalar = 1;
   for(int i = 0; i < hearts.size(); i += 20) {
     for(int j = 0; j < 20; j++) {
@@ -340,6 +338,7 @@ void changeOpacity() {
 
 // Function to reset the game
 void reset() {
+  // Reset everything to default
   screen = 1;
   playerChosen = false;
   scroll = 0;
@@ -416,11 +415,13 @@ void mouseClicked() {
     
     // Win screen
     case 3:
+    // Reset game
     if(replay.clicked()) reset();
     break;
     
     // Lose screen
     case 4:
+    // Reset game
     if(replay.clicked()) reset();
     break;
   }
