@@ -126,6 +126,9 @@ void dateScreen() {
     hearts.get(i).display();
     hearts.get(i).update();
   }
+  //hearts.add(new Heart(int(random(0, width)), height + 10, 255, int(random(5, 10)), int(random(-10, -5))));
+  //hearts.get(0).display();
+  //hearts.get(0).update();
   
   // Characters
   player.display();
@@ -291,7 +294,7 @@ void createQuestions() {
 void increaseHearts() {
   // Add hearts to the list
   for(int i = 0; i < 20; i++) {
-    hearts.add(new Heart(int(random(0, width)), height + 10, 255, int(random(5, 10)), int(random(-10, -5))));
+    hearts.add(new Heart(int(random(0, width)), height + 10, 42.5));
   }
 }
 
@@ -314,12 +317,25 @@ void nextQuestion() {
 void increaseAffection() {
   correctAnswers++;
   increaseHearts();
+  changeOpacity();
 }
 
 // Function to decrease affection
 void decreaseAffection() {
   incorrectAnswers++;
   decreaseHearts();
+  changeOpacity();
+}
+
+// Function to change the opacity of the hearts
+void changeOpacity() {
+  int scalar = 1;
+  for(int i = 0; i < hearts.size(); i += 20) {
+    for(int j = 0; j < 20; j++) {
+      hearts.get(j).setA(scalar * 42.5);
+    }
+    scalar++;
+  }
 }
 
 // Function to reset the game

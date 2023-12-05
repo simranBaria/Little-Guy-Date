@@ -1,12 +1,12 @@
 class Heart {
   // Initialize variables
   PVector position, velocity;
-  int centre, a, range;
+  int centre, range, left, right;
+  float a;
   
   // Constructor
-  Heart(int x, int y, int a, int xSpeed, int ySpeed) {
+  Heart(int x, int y, float a) {
     position = new PVector(x, y);
-    velocity = new PVector(xSpeed, ySpeed);
     
     // Variable for opacity
     this.a = a;
@@ -16,6 +16,10 @@ class Heart {
     
     // Variable for the range the heart can move from the centre position
     range = int(random(100, 200));
+    left = centre - range;
+    right = centre + range;
+    
+    velocity = setPath();
   }
   
   // Function to display heart
@@ -34,14 +38,29 @@ class Heart {
     position.add(velocity);
     
     // Flip the x speed if the heart reached the end of it's range
-    if(dist(centre, 0, position.x, 0) >= range) velocity.x *= -1;
+    if(atBounds()) velocity = setPath();
     
     // Put the heart back at the bottom if it went off screen
     if(dist(0, height + 10, 0, position.y) >= height + 10) position.y = height + 10;
   }
   
   // Function to change opacity
-  void setA(int a) {
+  void setA(float a) {
     this.a = a;
+    println(a);
+  }
+  
+  boolean atBounds() {
+    if(dist(centre, 0, position.x, 0) >= range) return true;
+    else return false;
+  }
+  
+  PVector setPath() {
+    PVector path = PVector.random2D();
+    path.mult(5);
+    if(position.x <= left && path.x < 0) path.x *= -1;
+    else if(position.x >= right && path.x > 0) path.x *= -1;
+    if(path.y > 0) path.y *= -1;
+    return path;
   }
 }
