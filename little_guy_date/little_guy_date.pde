@@ -7,7 +7,7 @@ Go on a date and try to win their heart!
 
 // Initialize variable
 boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
-int screen, scroll;
+int screen, scroll, currentQuestion, correctAnswers, incorrectAnswers;
 LittleGuy playerOptions[], dateOptions[], date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
@@ -45,10 +45,12 @@ void setup() {
   
   // Create questions
   createQuestions();
+  currentQuestion = 0;
   
   // Create hearts
   hearts = new ArrayList<Heart>();
-  increaseAffection();
+  correctAnswers = 0;
+  incorrectAnswers = 0;
 }
 
 // Draw function
@@ -151,7 +153,7 @@ void dateScreen() {
   triangle(400, 450, 410, 470, 390, 470);
   
   // Questions
-  questions[0].display();
+  questions[currentQuestion].display();
 }
 
 // Function to draw the win screen
@@ -285,12 +287,47 @@ void createQuestions() {
   questions[6].badButton.setW(questions[6].badButton.w + 100);
 }
 
-// Function to increase affection
-void increaseAffection() {
-  // Add hearts to list
+// Function to increase hearts in list
+void increaseHearts() {
+  // Add hearts to the list
   for(int i = 0; i < 20; i++) {
     hearts.add(new Heart(int(random(0, width)), height + 10, 255, int(random(5, 10)), int(random(-10, -5))));
   }
+}
+
+// Function to decrease hearts in list
+void decreaseHearts() {
+  // Remove hearts from the list
+  if(!hearts.isEmpty()) {
+    for(int i = 0; i < 20; i++) {
+      hearts.remove(hearts.size() - 1);
+    }
+  }
+}
+
+// Function to move on to the next question
+void nextQuestion() {
+  currentQuestion++;
+}
+
+// Function to increase affection
+void increaseAffection() {
+  correctAnswers++;
+  increaseHearts();
+}
+
+// Function to decrease affection
+void decreaseAffection() {
+  incorrectAnswers++;
+  decreaseHearts();
+}
+
+// Function to reset the game
+void reset() {
+  screen = 1;
+  playerChosen = false;
+  scroll = 0;
+  currentQuestion = 0;
 }
 
 // Mouse clicked function
@@ -300,14 +337,11 @@ void mouseClicked() {
     // Select screen
     case 1:
     // Left arrow button
-    //println(mouseX);
     if(leftArrow.clicked()) {
       // Scroll through options
-      //print("clicked");
       scroll--;
       if(scroll == -1) {
         // Scroll back to other end
-        //println("scrolled");
         scroll = 2;
       }
     }
@@ -341,14 +375,34 @@ void mouseClicked() {
     
     // Date screen
     case 2:
+    // Good answer button
+    if(questions[currentQuestion].goodButton.clicked()) {
+      increaseAffection();
+      nextQuestion();
+    }
+    
+    // Bad answer button
+    else if(questions[currentQuestion].badButton.clicked()) {
+      decreaseAffection();
+      nextQuestion();
+    }
+    
+    // Check if character has run through all dialogue
+    if(currentQuestion == questions.length) {
+      // Decide ending based on affection
+      if(correctAnswers > incorrectAnswers) screen = 3;
+      else screen = 4;
+    }
     break;
     
     // Win screen
     case 3:
+    if(replay.clicked()) reset();
     break;
     
     // Lose screen
     case 4:
+    if(replay.clicked()) reset();
     break;
   }
 }

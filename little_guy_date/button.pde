@@ -23,16 +23,9 @@ class Button {
   
   // Function to check if the button has been clicked
   boolean clicked() {
-    //println("called");
     // Check if mouse coordinates are within bounds
-    if((mouseX >= x && mouseX <= (x + w)) && (mouseY >= y && mouseY <= (y + h))) {
-      //println("clicked");
-      return true;
-    }
-    else {
-      //println("false");
-      return false;
-    }
+    if((mouseX >= x && mouseX <= (x + w)) && (mouseY >= y && mouseY <= (y + h))) return true;
+    else return false;
   }
   
   // Function to set x

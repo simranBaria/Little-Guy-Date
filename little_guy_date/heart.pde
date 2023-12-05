@@ -33,19 +33,11 @@ class Heart {
   void update() {
     position.add(velocity);
     
-    //println(dist(position.x, position.y, centre, position.y));
     // Flip the x speed if the heart reached the end of it's range
-    if(dist(centre, 0, position.x, 0) >= range) {
-      println("flip");
-      println(range);
-      //println(dist(position.x, position.y, centre, position.y));
-      velocity.x *= -1;
-    }
+    if(dist(centre, 0, position.x, 0) >= range) velocity.x *= -1;
     
     // Put the heart back at the bottom if it went off screen
-    if(dist(0, height + 10, 0, position.y) >= height + 10) {
-      position.y = height + 10;
-    }
+    if(dist(0, height + 10, 0, position.y) >= height + 10) position.y = height + 10;
   }
   
   // Function to change opacity
