@@ -328,6 +328,9 @@ void reset() {
   playerChosen = false;
   scroll = 0;
   currentQuestion = 0;
+  correctAnswers = 0;
+  incorrectAnswers = 0;
+  hearts.removeAll(hearts);
 }
 
 // Mouse clicked function
