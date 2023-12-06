@@ -6,8 +6,8 @@ Go on a date and try to win their heart!
 */
 
 // Initialize variable
-boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen;
-int screen, scroll, currentQuestion, correctAnswers, incorrectAnswers;
+boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen, pause;
+int screen, scroll, currentQuestion, correctAnswers, incorrectAnswers, time;
 LittleGuy playerOptions[], dateOptions[], date, player;
 PFont font;
 Button leftArrow, rightArrow, selectPlayer, selectDate, replay;
@@ -44,6 +44,7 @@ void setup() {
   // Create questions
   createQuestions();
   currentQuestion = 0;
+  pause = false;
   
   // Create hearts
   hearts = new ArrayList<Heart>();
@@ -153,7 +154,13 @@ void dateScreen() {
   triangle(400, 450, 410, 470, 390, 470);
   
   // Question
-  questions[currentQuestion].display();
+  if(!pause) questions[currentQuestion].display();
+  else {
+    if(millis() > time + 500) {
+      pause = false;
+      date.setExpression("neutral");
+    }
+  }
 }
 
 // Function to draw the win screen
@@ -352,6 +359,13 @@ void reset() {
   hearts.removeAll(hearts);
 }
 
+// Function to change the expressions back to neutral after a bit
+void changeExpression(int time) {
+  if(millis() < time + 2000) {
+    date.setExpression("happy");
+  }
+}
+
 // Mouse clicked function
 void mouseClicked() {
   // Switch based on which screen the player is on
@@ -399,14 +413,18 @@ void mouseClicked() {
     case 2:
     // Good answer button
     if(questions[currentQuestion].goodButton.clicked()) {
+      pause = true;
       date.setExpression("happy");
+      time = millis();
       increaseAffection();
       nextQuestion();
     }
     
     // Bad answer button
     else if(questions[currentQuestion].badButton.clicked()) {
+      pause = true;
       date.setExpression("angry");
+      time = millis();
       decreaseAffection();
       nextQuestion();
     }
