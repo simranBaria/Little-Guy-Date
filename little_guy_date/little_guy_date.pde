@@ -294,6 +294,10 @@ void createQuestions() {
   questions[6].goodButton.setW(questions[6].goodButton.w + 150);
   questions[6].badButton.setX(questions[6].badButton.x - 50);
   questions[6].badButton.setW(questions[6].badButton.w + 100);
+  
+  for(int i = 0; i < questions.length; i++) {
+    if(((int)(random(1, 3)) == 2)) swapButtons(questions[i]);
+  }
 }
 
 // Function to increase hearts in list
@@ -357,13 +361,24 @@ void reset() {
   correctAnswers = 0;
   incorrectAnswers = 0;
   hearts.removeAll(hearts);
+  for(int i = 0; i < questions.length; i++) {
+    if(((int)(random(1, 3)) == 2)) swapButtons(questions[i]);
+  }
 }
 
-// Function to change the expressions back to neutral after a bit
-void changeExpression(int time) {
-  if(millis() < time + 2000) {
-    date.setExpression("happy");
-  }
+// Function to swap the placements of two buttons
+void swapButtons(Question question) {
+  // Get the position
+  int left = question.goodX;
+  int right = question.badX;
+  
+  // Swap the text
+  question.setGoodX(right);
+  question.setBadX(left);
+  
+  // Swap the buttons
+  question.goodButton.setX(right - question.goodButton.w / 2);
+  question.badButton.setX(left - question.badButton.w / 2);
 }
 
 // Mouse clicked function
