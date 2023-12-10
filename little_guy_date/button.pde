@@ -1,15 +1,16 @@
 class Button {
   // Initialize variables
   int x, y, w, h;
-  color colour;
+  color colour, highlight;
   
   // Constructor
-  Button(int x, int y, int w, int h, color colour) {
+  Button(int x, int y, int w, int h, color colour, color highlight) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.colour = colour;
+    this.highlight = highlight;
   }
   
   //Function to display button
@@ -17,12 +18,16 @@ class Button {
     // Draw the button
     noStroke();
     rectMode(CORNER);
-    fill(colour);
+    
+    // Highlight the button if it's being hovered over
+    if(rollover()) fill(highlight);
+    else fill(colour);
+    
     rect(x, y, w, h);
   }
   
-  // Function to check if the button has been clicked
-  boolean clicked() {
+  // Function to check if the button is being hovered over
+  boolean rollover() {
     // Check if mouse coordinates are within bounds
     if((mouseX >= x && mouseX <= (x + w)) && (mouseY >= y && mouseY <= (y + h))) return true;
     else return false;

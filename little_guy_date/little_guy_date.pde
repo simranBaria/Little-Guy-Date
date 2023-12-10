@@ -35,11 +35,11 @@ void setup() {
   scroll = 0;
   
   // Create buttons
-  leftArrow = new Button(150, 250, 50, 100, color(255));
-  rightArrow = new Button(600, 250, 50, 100, color(255));
-  selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77));
-  selectDate = new Button(350, 500, 100, 50, color(104, 31, 77));
-  replay = new Button(600, 500, 100, 50, color(104, 31, 77));
+  leftArrow = new Button(150, 250, 50, 100, color(255), color(213, 225, 238));
+  rightArrow = new Button(600, 250, 50, 100, color(255), color(213, 225, 238));
+  selectPlayer = new Button(320, 500, 160, 50, color(104, 31, 77), color(152, 26, 104));
+  selectDate = new Button(350, 500, 100, 50, color(104, 31, 77), color(152, 26, 104));
+  replay = new Button(600, 500, 100, 50, color(104, 31, 77), color(152, 26, 104));
   
   // Create questions
   createQuestions();
@@ -228,16 +228,21 @@ void loseScreen() {
   fill(255);
   rect(350, 250, 200, 150);
   triangle(350, 370, 380, 400, 320, 430);
+  
   fill(172, 177, 183);
   rect(360, 300, 180, 20);
+  
   fill(25, 36, 174);
   textAlign(LEFT);
   text("Google", 370, 290);
+  
   fill(0);
   textSize(15);
   text("How to date", 370, 315);
   text("Search", 370, 335);
-  stroke(0);
+  
+  stroke(25, 36, 174);
+  strokeWeight(1.75);
   noFill();
   ellipse(425, 328, 5, 5);
   line(417, 335, 423, 330);
@@ -388,7 +393,7 @@ void mouseClicked() {
     // Select screen
     case 1:
     // Left arrow button
-    if(leftArrow.clicked()) {
+    if(leftArrow.rollover()) {
       // Scroll through options
       scroll--;
       if(scroll == -1) {
@@ -398,7 +403,7 @@ void mouseClicked() {
     }
     
     // Right arrow button
-    else if(rightArrow.clicked()) {
+    else if(rightArrow.rollover()) {
       // Scroll through options
       scroll++;
       // Scroll back to other end
@@ -406,7 +411,7 @@ void mouseClicked() {
     }
     
     // Select player button
-    else if(!playerChosen && selectPlayer.clicked()) {
+    else if(!playerChosen && selectPlayer.rollover()) {
       // Set player's avatar as the selected choice
       player = new LittleGuy(scroll + 1);
       scroll = 0;
@@ -414,7 +419,7 @@ void mouseClicked() {
     }
     
     // Select date button
-    else if(playerChosen && selectDate.clicked()) {
+    else if(playerChosen && selectDate.rollover()) {
       // Set player's date as the selected choice
       date = new LittleGuy(scroll + 4);
       screen = 2;
@@ -427,7 +432,7 @@ void mouseClicked() {
     // Date screen
     case 2:
     // Good answer button
-    if(questions[currentQuestion].goodButton.clicked()) {
+    if(questions[currentQuestion].goodButton.rollover()) {
       pause = true;
       date.setExpression("happy");
       time = millis();
@@ -436,7 +441,7 @@ void mouseClicked() {
     }
     
     // Bad answer button
-    else if(questions[currentQuestion].badButton.clicked()) {
+    else if(questions[currentQuestion].badButton.rollover()) {
       pause = true;
       date.setExpression("angry");
       time = millis();
@@ -470,13 +475,13 @@ void mouseClicked() {
     // Win screen
     case 3:
     // Reset game
-    if(replay.clicked()) reset();
+    if(replay.rollover()) reset();
     break;
     
     // Lose screen
     case 4:
     // Reset game
-    if(replay.clicked()) reset();
+    if(replay.rollover()) reset();
     break;
   }
 }

@@ -13,8 +13,8 @@ class Question {
     goodX = 200;
     badX = 600;
     
-    goodButton = new Button(goodX - 50, 100, 100, 50, color(255, 212, 244));
-    badButton = new Button(badX - 50, 100, 100, 50, color(255, 212, 244));
+    goodButton = new Button(goodX - 50, 100, 100, 50, color(255, 212, 244), color(208, 150, 192));
+    badButton = new Button(badX - 50, 100, 100, 50, color(255, 212, 244), color(208, 150, 192));
   }
   
   // Function to display the question
