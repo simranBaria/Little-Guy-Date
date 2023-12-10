@@ -19,6 +19,7 @@ class Heart {
     left = centre - range;
     right = centre + range;
     
+    // Path for the heart
     velocity = setPath();
   }
   

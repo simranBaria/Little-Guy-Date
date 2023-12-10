@@ -5,10 +5,12 @@ class LittleGuy {
   
   // Constructor
   LittleGuy(int style) {
-    // Create
+    // Create character
     this.style = style;
     this.x = 0;
     this.y = 0;
+    
+    // Default expression is neutral
     expression = "neutral";
   }
   
@@ -90,7 +92,7 @@ class LittleGuy {
     rect(x - 50, y - 80, 110, 20);
     quad(x - 60, y - 70, x - 50, y - 80, x - 30, y - 50, x - 10, y - 60);
     
-    // Eyes
+    // Expression
     expression();
   }
   
@@ -127,7 +129,7 @@ class LittleGuy {
     quad(x + 50, y - 60, x + 60, y - 80, x + 70, y - 70, x + 60, y - 40);
     rect(x - 20, y - 80, 80, 20);
     
-    // Eyes
+    // Expression
     expression();
   }
   
@@ -175,7 +177,7 @@ class LittleGuy {
     rect(x - 30, y - 90, 90, 40);
     triangle(x, y - 50, x + 10, y - 40, x + 30, y - 50);
     
-    // Eyes
+    // Expression
     expression();
   }
   
@@ -219,7 +221,7 @@ class LittleGuy {
     triangle(x + 10, y - 110, x + 10, y - 80, x + 40, y - 80);
     rect(x + 30, y - 60, 20, 20);
     
-    // Eyes
+    // Expression
     expression();
   }
   
@@ -262,7 +264,7 @@ class LittleGuy {
     triangle(x - 80, y - 90, x - 40, y - 70, x - 30, y - 100);
     rect(x + 30, y - 10, 20, 20);
     
-    // Eyes
+    // Expression
     expression();
   }
   
@@ -303,16 +305,16 @@ class LittleGuy {
     quad(x + 30, y - 100, x + 60, y - 80, x + 70, y - 50, x + 40, y - 40);
     triangle(x + 40, y - 50, x + 70, y - 50, x + 70, y - 30);
     
-    // Eyes
+    // Expression
     expression();
   }
   
-  // Method to change the expression
+  // Function to change the expression
   void setExpression(String expression) {
     this.expression = expression;
   }
   
-  // Method to draw the expression
+  // Function to draw the expression
   void expression() {
     fill(0);
     // Player characters

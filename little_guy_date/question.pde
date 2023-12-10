@@ -10,9 +10,11 @@ class Question {
     this.goodAnswer = goodAnswer;
     this.badAnswer = badAnswer;
     
+    // Button x positions
     goodX = 200;
     badX = 600;
     
+    // Create buttons
     goodButton = new Button(goodX - 50, 100, 100, 50, color(255, 212, 244), color(208, 150, 192));
     badButton = new Button(badX - 50, 100, 100, 50, color(255, 212, 244), color(208, 150, 192));
   }
@@ -37,10 +39,12 @@ class Question {
     text(badAnswer, badX, 130);
   }
   
+  // Function to set the x position of the good answer button
   void setGoodX(int goodX) {
     this.goodX = goodX;
   }
   
+  // Function to set the x position of the bad answer button
   void setBadX(int badX) {
     this.badX = badX;
   }

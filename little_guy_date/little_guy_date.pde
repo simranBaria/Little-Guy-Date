@@ -1,11 +1,11 @@
 /*
-Little Guy Date - Milestone 4
+Little Guy Date
 991737688
 December 2023
 Go on a date and try to win their heart!
 */
 
-// Initialize variable
+// Initialize variables
 boolean showStartScreen, showDateScreen, showWinScreen, showLoseScreen, playerChosen, pause;
 int screen, scroll, currentQuestion, correctAnswers, incorrectAnswers, time;
 LittleGuy playerOptions[], dateOptions[], date, player;

@@ -38,18 +38,8 @@ class Button {
     this.x = x;
   }
   
-  // Function to set y
-  void setY(int y) {
-    this.y = y;
-  }
-  
   // Function to set w
   void setW(int w) {
     this.w = w;
-  }
-  
-  // Function to set h
-  void setH(int h) {
-    this.h = h;
   }
 }
